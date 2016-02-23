@@ -44,4 +44,4 @@ Scenario: all ratings selected
   # When I check "ratings[G]"
   # When I check "ratings[NC-17]"
   When I press "Refresh"
-  Then I should see all of the movies
+  Then I should see all the movies
