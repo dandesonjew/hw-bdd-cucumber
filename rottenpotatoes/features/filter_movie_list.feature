@@ -26,22 +26,25 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   When I check "ratings[PG]"
   # enter step(s) to uncheck all other checkboxes
   When I uncheck "ratings[PG-13]"
-  When I uncheck "ratings[R]"
+  When I check "ratings[R]"
   When I uncheck "ratings[G]"
   # enter step to "submit" the search form on the homepage
   When I press "Refresh"
   # enter step(s) to ensure that PG and R movies are visible
-  Then I should see "PG"
+  #Then I should see "PG"
   Then the "ratings_PG" checkbox should be checked
+  #Then the "ratings_R" checkbox should be checked
   # enter step(s) to ensure that other movies are not visible
-  Then I should not see "ratings_R"
+  Then the "ratings_PG-13" checkbox should not be checked
+  Then the "ratings_G" checkbox should not be checked
   
 Scenario: all ratings selected
   # see assignment
-  When I check the following ratings: ratings[PG], ratings[PG-13], ratings[R], ratings[G]
-  #When I check "ratings[PG]"
-  # When I check "ratings[PG-13]"
-  # When I check "ratings[R]"
+  #When I check the following ratings: ratings[PG], ratings[PG-13], ratings[R], ratings[G]
+  Then the "ratings_PG" checkbox should be checked
+  Then the "ratings_R" checkbox should be checked
+  Then the "ratings_G" checkbox should be checked
+  Then the "ratings_PG-13" checkbox should be checked
   # When I check "ratings[G]"
   # When I check "ratings[NC-17]"
   When I press "Refresh"
