@@ -32,6 +32,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   When I press "Refresh"
   # enter step(s) to ensure that PG and R movies are visible
   Then I should see "PG"
+  Then the "ratings_PG" checkbox should be checked
   # enter step(s) to ensure that other movies are not visible
   Then I should not see "ratings_R"
   

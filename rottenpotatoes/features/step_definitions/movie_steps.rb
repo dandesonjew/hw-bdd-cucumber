@@ -14,8 +14,11 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  regexp = /#{e1}.*#{e2}/m
-  page.body.should=~regexp
+  first = page.body.index(e1)
+  second = page.body.index(e2)
+  if first > second
+    fail "wrong order"
+  end
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -40,5 +43,7 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  Movie.count == Movie.all.length
+  if Movie.count != 10
+    fail "I don't see all the movies"
+  end
 end
